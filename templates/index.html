@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7th sem project</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        header p {
+            margin: 5px 0 0;
+            font-size: 14px;
+        }
+        nav {
+            background-color: yellow;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px;
+            margin: 5px;
+            display: inline-block;
+        }
+        main {
+            padding: 20px;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            text-align: center;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: inline-block;
+            width: 200px;
+            text-align: right;
+            margin-right: 10px;
+            color: red; /* Changed color to red */
+        }
+
+        input {
+            display: inline-block;
+            width: calc(100% - 220px);
+            margin-bottom: 10px;
+            padding: 6px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        h2 {
+            margin-top: 20px;
+            color: #4CAF50;
+        }
+
+        .result-box {
+            max-width: 250px;
+            margin: 20px auto;
+            border: 1px solid #ccc;
+            padding: 5px;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>BREAST CANCER DETECTION USING MACHINE LEARNING</h1>
+        <p>(This Model is Developed by Abhijit Saikia and Jyotiraj Nath)</p>
+    </header>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#service">Service</a>
+    </nav>
+
+    <main>
+        <!-- ML model content goes here -->
+
+        <!-- Cancer Prediction App form -->
+        <div class="container">
+            <h1>Test Cancer</h1>
+            <form action="{{ url_for('predict') }}" method="post">
+                {% set feature_names = ["Radius Mean", "Texture Mean", "Perimeter Mean", "Area Mean", "Smoothness Mean",
+                                        "Compactness Mean", "Concavity Mean", "Concave Points Mean", "Symmetry Mean",
+                                        "Fractal Dimension Mean", "Radius SE", "Texture SE", "Perimeter SE", "Area SE",
+                                        "Smoothness SE", "Compactness SE", "Concavity SE", "Concave Points SE", "Symmetry SE",
+                                        "Fractal Dimension SE", "Radius Worst", "Texture Worst", "Perimeter Worst", "Area Worst",
+                                        "Smoothness Worst", "Compactness Worst", "Concavity Worst", "Concave Points Worst", "Symmetry Worst"] %}
+                {% for i in range(29) %}
+                    <label for="feature{{ i }}">{{ feature_names[i] }}</label>
+                    <input type="text" name="feature{{ i }}" required>
+                {% endfor %}
+                <button type="submit">Predict</button>
+            </form>
+
+            <!-- Result Box -->
+            {% if result %}
+                <div class="result-box">
+                    <h2>Test Result: {{ result }}</h2>
+                </div>
+            {% endif %}
+        </div>
+    </main>
+
+    <footer>
+        <p>Follow us on Instagram: Abhijit_sr1</p>
+        <p>Phone: 1234567890</p>
+        <p>Email: abhijitsaikia.com</p>
+        <p>Headquater:Lasit boy's Hostel, DEC</p>
+        &copy; 2023 abhijit & jyotiraj's ML Model. All rights reserved.
+    </footer>
+
+</body>
+</html>
