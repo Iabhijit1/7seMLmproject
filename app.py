@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 import joblib
 import numpy as np
-import os # <--- Add this import
+import os  # <--- Added for Render compatibility
 
 app = Flask(__name__)
 
@@ -26,7 +26,8 @@ def predict():
         return render_template('index.html', result=result)
 
 if __name__ == '__main__':
-    # Render provides a PORT environment variable. If not found, it defaults to 5000.
+    # Render assigns a dynamic port via environment variables. 
+    # If it's not found (like when running locally), it defaults to 5000.
     port = int(os.environ.get("PORT", 5000))
-    # Use 0.0.0.0 to let the app be reachable on the network
+    # '0.0.0.0' is required to make the server accessible externally on Render
     app.run(host='0.0.0.0', port=port)
